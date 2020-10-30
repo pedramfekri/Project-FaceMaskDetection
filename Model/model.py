@@ -1,2 +1,2 @@
-# Start
+# ResNet
 import numpy as np
