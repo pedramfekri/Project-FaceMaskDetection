@@ -5,7 +5,7 @@ import torch.utils.data as td
 
 
 # get data from the folders in the root and assign labels to data of every folder separately.
-def load_data(root_path, dir, test_split, batch_size, phase):
+def load_data(root_path, dir, test_split, batch_size):
     transform_dict = {
         'src': transforms.Compose(
         [transforms.RandomResizedCrop(224),
@@ -21,7 +21,7 @@ def load_data(root_path, dir, test_split, batch_size, phase):
                               std=[0.229, 0.224, 0.225]),
          ])}
 
-    data = datasets.ImageFolder(root=root_path + dir, transform=transform_dict[phase])
+    data = datasets.ImageFolder(root=root_path + dir, transform=transform_dict['src'])
 
     dataset_size = len(data)
     test_size = int(test_split * dataset_size)
@@ -34,3 +34,9 @@ def load_data(root_path, dir, test_split, batch_size, phase):
     data_loader_test = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=True, drop_last=False, num_workers=2)
 
     return data_loader_train, data_loader_test
+
+
+# root_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Dataset/'
+# dir = 'Dataset-3Class-Sample'
+#
+# load_data(root_path, dir, 0.3, 32)
