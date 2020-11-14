@@ -17,12 +17,11 @@ root_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Dataset/'
 dir = 'Dataset-3Class-Sample'
 train, test, val = ds.load_data(root_path, dir, 0.3, 0.1, 32)
 
-for i, (images, labels) in enumerate(train):
-        # forward
-        outputs = model(images)
+total_step = len(train)
+loss_list = []
+acc_list = []
+acc_list_val = []
 
-
-"""
 for epoch in range(num_epochs):
     for i, (images, labels) in enumerate(train):
         # forward
@@ -39,9 +38,19 @@ for epoch in range(num_epochs):
         correct = (predicted == labels).sum().item()
         acc_list.append(correct / total)
         if (i + 1) % 100 == 0:
-            print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Accuracy: {:.2f}%'.format(epoch + 1, num_epochs, i + 1, total_step,
+            correct_v = 0
+            total_v = 0
+            for (images_v, labels_v) in enumerate(val):
+                outputs = model(images_v)
+                _, predicted = torch.max(outputs.data, 1)
+                correct_v += (predicted == labels_v).sum().item()
+                total_v += labels_v.size(0)
+
+            acc_list_val.append(correct / total)
+            print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Accuracy: {:.2f}% ,Validation Accuracy: {:.2f}%'.format(epoch + 1, num_epochs, i + 1, total_step,
                                                                                    loss.item(), (correct / total) * 100))
 
+"""
 model.eval()
 with torch.no_grad():
     correct = 0
