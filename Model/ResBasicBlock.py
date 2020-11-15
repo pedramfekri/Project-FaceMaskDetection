@@ -32,10 +32,10 @@ class ResBasicBlock(nn.Module):
         #    self.shortcut = lambda x: x
 
     def forward(self, x):
-        print("forward1")
+        # print("forward1")
         # print(self.in_planes)
         out = F.relu(self.bn1(self.conv1(x)))
-        print("forward2")
+        # print("forward2")
         out = self.bn2(self.conv2(out))
         out = out + self.shortcut(x)
         out = F.relu(out)

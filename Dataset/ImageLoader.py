@@ -34,9 +34,8 @@ def load_data(root_path, dir, test_split, val_split, batch_size):
                                                [train_size, test_size, val_size])
 
     data_loader_train = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=False, num_workers=2)
-    data_loader_test = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=True, drop_last=False, num_workers=2)
-    data_loader_val = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=True, drop_last=False,
-                                                   num_workers=2)
+    data_loader_test  = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=True, drop_last=False, num_workers=2)
+    data_loader_val   = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=True, drop_last=False, num_workers=2)
 
     return data_loader_train, data_loader_test, data_loader_val
 
