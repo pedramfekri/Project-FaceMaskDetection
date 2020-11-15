@@ -24,7 +24,7 @@ data_transforms = transforms.Compose([transforms.Resize((224, 224)),
 # frame_t = Image.open("/home/pedram/PycharmProjects/Project-FaceMaskDetection/Dataset/Dataset-3Class-Sample/Mask-resized/00021_Mask.jpg.jpg")
 # frame_t = Image.open("/home/pedram/PycharmProjects/Project-FaceMaskDetection/Dataset/Dataset-3Class-Sample/NoMask-resized/02769.png.jpg")
 # frame_t = Image.open("/home/pedram/PycharmProjects/Project-FaceMaskDetection/Dataset/Dataset-3Class-Sample/NotPerson-resized/00100.jpg.jpg")
-# frame_t = Image.open("/home/pedram/Downloads/20201115_141136.jpg")
+
 cam = cv2.VideoCapture(0)
 ret, frame_t = cam.read()
 # frame_t = frame_t.rotate(-90)
