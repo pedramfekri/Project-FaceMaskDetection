@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import Model.SimpleCNN as SCNN
 import Model.SimpleCNN2 as SCNN2
 
-num_epochs = 1
+num_epochs = 4
 num_classes = 3
 learning_rate = 0.001
 
