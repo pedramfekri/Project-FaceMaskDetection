@@ -8,10 +8,10 @@ import torchvision.datasets as datasets
 import torch.utils.data as td
 import numpy as np
 
-model_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Train/'
+model_path = 'C:\\Users\\Pedram\\PycharmProjects\\Project-FaceMaskDetection\\Train\\'
 model_name = 'entire_model.pt'
 
-root_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Dataset/'
+root_path = 'C:\\Users\\Pedram\\PycharmProjects\\Project-FaceMaskDetection\\Dataset\\'
 dir = 'Dataset-3Class-Sample'
 
 transform_dict = {
