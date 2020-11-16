@@ -4,8 +4,6 @@ import torch
 import torch.nn as nn
 import numpy as np
 import matplotlib.pyplot as plt
-import Model.SimpleCNN as SCNN
-import Model.SimpleCNN2 as SCNN2
 
 num_epochs = 4
 num_classes = 3
@@ -13,18 +11,15 @@ learning_rate = 0.001
 
 # torch.cuda.set_device(0)
 
-# model = res.ResNet18()
-model = SCNN2.SimpleCNN2()
+model = res.ResNet18()
+
+
 
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-#root_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Dataset/'
-#model_path = 'entire_model.pt'
-#dir = 'Dataset-3Class-Sample'
-
-root_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Dataset/'
-model_path = 'SimpleCNNModel.pt'
+root_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Dataset/'
+model_path = 'entire_model.pt'
 dir = 'Dataset-3Class-Sample'
 
 train, test, val = ds.load_data(root_path, dir, 0.3, 0.1, 32)
@@ -86,7 +81,6 @@ plt.show()
 
 
 model.eval()
-check = 1
 with torch.no_grad():
     correct = 0
     total = 0
@@ -95,18 +89,6 @@ with torch.no_grad():
         _, predicted = torch.max(outputs.data, 1)
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
-        if check==1:
-            AllLabels = labels.numpy()
-            AllPredictions = predicted.numpy()
-            check=0
-        else:
-            AllLabels = np.append(AllLabels,labels.numpy())
-            AllPredictions = np.append(AllPredictions,predicted.numpy())
 
         print('Test Accuracy of the model on the test images: {} %'
               .format((correct / total) * 100))
-
-    from sklearn.metrics import classification_report
-    print(classification_report(AllLabels, AllPredictions))
-
-
