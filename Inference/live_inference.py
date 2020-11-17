@@ -7,8 +7,13 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 
-model_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Train/'
+# model_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Train/'
+# model_name = 'entire_model.pt'
+
+model_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Train/'
 model_name = 'entire_model.pt'
+
+
 
 model = torch.load(model_path + model_name)
 
