@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 # model_name = 'entire_model.pt'
 
 model_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Train/'
-model_name = 'entire_model.pt'
+model_name = 'CNN4.pt'
 
 
 
