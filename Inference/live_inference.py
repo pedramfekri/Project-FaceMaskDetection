@@ -7,8 +7,13 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 
-model_path = 'C:\\Users\\Pedram\\PycharmProjects\\Project-FaceMaskDetection\\Train\\'
-model_name = 'entire_model.pt'
+# model_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Train/'
+# model_name = 'entire_model.pt'
+
+model_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Train/'
+model_name = 'CNN4.pt'
+
+
 
 model = torch.load(model_path + model_name)
 
@@ -50,7 +55,7 @@ def CaptureImage(cameraPort):
 
         detected_class = classes[predicted]
         print(detected_class)
-        print(outputs.data)
+        # print(outputs.data)
         cv2.imshow("detected_class", frame)
 
         k = cv2.waitKey(1)

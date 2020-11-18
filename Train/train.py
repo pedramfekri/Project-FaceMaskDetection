@@ -4,21 +4,32 @@ import torch
 import torch.nn as nn
 import numpy as np
 import matplotlib.pyplot as plt
+import Model.SimpleCNN as SCNN
 
-num_epochs = 4
+
+num_epochs = 1
 num_classes = 3
 learning_rate = 0.001
 
 # torch.cuda.set_device(0)
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+print(torch.cuda.is_available())
+
 
 model = res.ResNet18()
+#model = SCNN.SimpleCNN()
+
+model.to(device)
+
+
 
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-root_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Dataset/'
-model_path = 'entire_model.pt'
-dir = 'Dataset-3Class-Sample'
+root_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Dataset/'
+model_path = 'ResNetepochs20.pt'
+dir = 'Dataset-3Class-Balanced'
+
 train, test, val = ds.load_data(root_path, dir, 0.3, 0.1, 32)
 
 total_step = len(train)
@@ -27,8 +38,9 @@ acc_list = []
 acc_list_val = []
 
 for epoch in range(num_epochs):
-    for i, (images, labels) in enumerate(train):
+    for i, data in enumerate(train):
         # forward
+        images, labels = data[0].to(device), data[1].to(device)
         outputs = model(images)
         loss = criterion(outputs, labels)
         loss_list.append(loss.item())
@@ -44,7 +56,8 @@ for epoch in range(num_epochs):
         if (i + 1) % 10 == 0:
             correct_v = 0
             total_v = 0
-            for images_v, labels_v in val:
+            for dataVal in val:
+                images_v, labels_v = dataVal[0].to(device), dataVal[1].to(device)
                 outputs = model(images_v)
                 _, predicted = torch.max(outputs.data, 1)
                 correct_v += (predicted == labels_v).sum().item()
@@ -56,7 +69,7 @@ for epoch in range(num_epochs):
                                                                                             loss.item(), (correct / total) * 100, (correct_v / total_v) * 100))
 
 
-torch.save(model, model_path)
+#torch.save(model, model_path)
 
 plt.figure()
 
@@ -78,13 +91,30 @@ plt.show()
 
 
 model.eval()
+check = 1
 with torch.no_grad():
     correct = 0
     total = 0
-    for images, labels in test:
+    for data in test:
+        images, labels = data[0].to(device), data[1].to(device)
         outputs = model(images)
         _, predicted = torch.max(outputs.data, 1)
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
-        print('Test Accuracy of the model on the 10000 test images: {} %'
-        .format((correct / total) * 100))
+        if check == 1:
+            AllLabels = labels.cpu().numpy()
+            AllPredictions = predicted.cpu().numpy()
+            check = 0
+        else:
+            AllLabels = np.append(AllLabels, labels.cpu().numpy())
+            AllPredictions = np.append(AllPredictions, predicted.cpu().numpy())
+
+        print('Test Accuracy of the model on the test images: {} %'
+              .format((correct / total) * 100))
+
+    from sklearn.metrics import classification_report
+    print(classification_report(AllLabels, AllPredictions))
+    from sklearn.metrics import confusion_matrix
+    print(confusion_matrix(AllLabels, AllPredictions))
+
+
