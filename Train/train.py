@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import Model.SimpleCNN as SCNN
 
 
-num_epochs = 1
+num_epochs = 20
 num_classes = 3
 learning_rate = 0.001
 
@@ -69,7 +69,7 @@ for epoch in range(num_epochs):
                                                                                             loss.item(), (correct / total) * 100, (correct_v / total_v) * 100))
 
 
-#torch.save(model, model_path)
+torch.save(model, model_path)
 
 plt.figure()
 
