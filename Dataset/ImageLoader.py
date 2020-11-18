@@ -40,8 +40,9 @@ def load_data(root_path, dir, test_split, val_split, batch_size):
     return data_loader_train, data_loader_test, data_loader_val
 
 
-# root_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Dataset/'
-# dir = 'Dataset-3Class-Sample'
+
+# root_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Dataset/'
+# dir = 'Dataset-3Class-Balanced'
 #
 # train, test, val = load_data(root_path, dir, 0.3, 0.1, 32)
 # print(len(train))
