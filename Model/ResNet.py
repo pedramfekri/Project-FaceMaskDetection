@@ -19,9 +19,11 @@ class ResNet(nn.Module):
         self.layer3 = make_basic_block_layer(block, 128, 256, num_blocks[2], stride=2)
         self.layer4 = make_basic_block_layer(block, 256, 512, num_blocks[3], stride=2)
 
+        self.GAP = nn.AdaptiveAvgPool2d((1, 1)) # just found
         self.linear = nn.Linear(512*block.expansion, num_classes)
 
     def forward(self, x):
+        # print(x.size())
         out = F.relu(self.bn1(self.conv1(x)))
         out = self.pool1(out)
         # print(out.size())
@@ -34,10 +36,17 @@ class ResNet(nn.Module):
         # print(256)
         out = self.layer4(out)
         # print(512)
-        out = F.avg_pool2d(out, 4)
         # print(out.size())
+        # out = F.avg_pool2d(out, 4)
+        # nn.AdaptiveAvgPool2d((1, 1))
+        # print('ave')
+        # print(out.size())
+        # print('ave')
+        out = self.GAP(out)
+        # print(out.size())
+        # print('flat')
         out = out.view(out.size(0), -1) # flattening
-        # print(out.size)
+        # print(out.size())
         out = self.linear(out)
         return out
 

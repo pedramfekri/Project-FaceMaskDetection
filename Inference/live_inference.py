@@ -10,10 +10,8 @@ import matplotlib.pyplot as plt
 # model_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Train/'
 # model_name = 'entire_model.pt'
 
-model_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Train/'
+model_path = '../Train/'
 model_name = 'FinalResNet.pt'
-
-
 
 model = torch.load(model_path + model_name)
 device = "cpu"
@@ -31,8 +29,8 @@ def CaptureImage(cameraPort):
     print("Space ==> Capture, Esc ==> Exit")
     data_transforms = transforms.Compose([transforms.Resize((224, 224)),
          transforms.ToTensor(),
-         transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                              std=[0.229, 0.224, 0.225]),
+         transforms.Normalize(mean=[0.5, 0.5, 0.5],
+                              std=[0.5, 0.5, 0.5]),
          ])
     while True:
         ret, frame = cam.read()
