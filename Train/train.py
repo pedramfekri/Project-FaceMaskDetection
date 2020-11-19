@@ -13,12 +13,15 @@ learning_rate = 0.001
 
 model = res.ResNet18()
 
+
+
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 root_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Dataset/'
 model_path = 'entire_model.pt'
 dir = 'Dataset-3Class-Sample'
+
 train, test, val = ds.load_data(root_path, dir, 0.3, 0.1, 32)
 
 total_step = len(train)
@@ -86,5 +89,6 @@ with torch.no_grad():
         _, predicted = torch.max(outputs.data, 1)
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
-        print('Test Accuracy of the model on the 10000 test images: {} %'
-        .format((correct / total) * 100))
+
+        print('Test Accuracy of the model on the test images: {} %'
+              .format((correct / total) * 100))
