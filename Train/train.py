@@ -27,7 +27,9 @@ criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 root_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Dataset/'
-model_path = 'ResNetepochs20.pt'
+model_path = 'FinalResNet.pt'
+#model_path = 'FinalCNN.pt'
+
 dir = 'Dataset-3Class-Balanced'
 
 train, test, val = ds.load_data(root_path, dir, 0.3, 0.1, 32)
@@ -109,11 +111,14 @@ with torch.no_grad():
             AllLabels = np.append(AllLabels, labels.cpu().numpy())
             AllPredictions = np.append(AllPredictions, predicted.cpu().numpy())
 
-        print('Test Accuracy of the model on the test images: {} %'
-              .format((correct / total) * 100))
+        print('Test Accuracy of the model on the {} test images: {} %'
+        .format(total, (correct / total) * 100))
 
+    print(' \n<<<<Class 0: Mask, Class 1: No Mask, Class 2: Not a Person>>>>')
+    print('Classification Report:')
     from sklearn.metrics import classification_report
     print(classification_report(AllLabels, AllPredictions))
+    print('Confusion Matrix:')
     from sklearn.metrics import confusion_matrix
     print(confusion_matrix(AllLabels, AllPredictions))
 
