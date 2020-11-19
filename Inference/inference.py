@@ -12,6 +12,7 @@ import numpy as np
 model_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Train/'
 model_name = 'FinalResNet.pt'
 
+
 root_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Dataset/'
 dir = 'Dataset-3Class-Balanced'
 
