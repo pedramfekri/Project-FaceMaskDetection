@@ -7,10 +7,17 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 
-model_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Train/'
-model_name = 'entire_model.pt'
+# model_path = '/home/pedram/PycharmProjects/Project-FaceMaskDetection/Train/'
+# model_name = 'entire_model.pt'
+
+model_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Train/'
+model_name = 'FinalResNet.pt'
+
+
 
 model = torch.load(model_path + model_name)
+device = "cpu"
+model.to(device)
 
 classes = ('mask', 'no-mask', 'not-a-person')
 
