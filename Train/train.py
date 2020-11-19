@@ -17,18 +17,16 @@ print(torch.cuda.is_available())
 
 
 model = res.ResNet18()
-#model = SCNN.SimpleCNN()
+# model = SCNN.SimpleCNN()
 
 model.to(device)
-
-
 
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-root_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Dataset/'
+root_path = '../Dataset/'
 model_path = 'FinalResNet.pt'
-#model_path = 'FinalCNN.pt'
+# model_path = 'FinalCNN.pt'
 
 dir = 'Dataset-3Class-Balanced'
 

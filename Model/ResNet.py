@@ -23,6 +23,7 @@ class ResNet(nn.Module):
         self.linear = nn.Linear(512*block.expansion, num_classes)
 
     def forward(self, x):
+        # print(x.size())
         out = F.relu(self.bn1(self.conv1(x)))
         out = self.pool1(out)
         # print(out.size())
@@ -40,12 +41,12 @@ class ResNet(nn.Module):
         # nn.AdaptiveAvgPool2d((1, 1))
         # print('ave')
         # print(out.size())
-        print('ave')
+        # print('ave')
         out = self.GAP(out)
-        print(out.size())
-        print('flat')
+        # print(out.size())
+        # print('flat')
         out = out.view(out.size(0), -1) # flattening
-        print(out.size())
+        # print(out.size())
         out = self.linear(out)
         return out
 

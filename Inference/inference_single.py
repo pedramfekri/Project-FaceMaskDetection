@@ -10,10 +10,10 @@ from PIL import Image
 import numpy as np
 import cv2
 
-model_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Train/'
+model_path = '../Train/'
 model_name = 'FinalResNet.pt'
 
-root_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Dataset/'
+root_path = '../Dataset/'
 dir = 'Dataset-3Class-Balanced'
 
 data_transforms = transforms.Compose([transforms.Resize((224, 224)),
