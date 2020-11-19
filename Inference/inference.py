@@ -10,7 +10,7 @@ import numpy as np
 
 
 model_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Train/'
-model_name = 'ResNetepochs20.pt'
+model_name = 'FinalResNet.pt'
 
 root_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Dataset/'
 dir = 'Dataset-3Class-Balanced'
@@ -35,7 +35,8 @@ dataset = torch.utils.data.DataLoader(data, batch_size=32, shuffle=True, drop_la
 
 
 model = torch.load(model_path + model_name)
-
+device="cpu"
+model.to(device)
 
 check = 1
 model.eval()
