@@ -1,4 +1,4 @@
-# Project-FaceMaskDetection
+# COMP 6721 Applied Artificial Intelligence (Fall 2020) -- Project Assignment Part I
 
 In this project, an image classifier has been desgined based on the ResNet graph on Pytorch.
 The dataset contains 9000 images of three classes: with face mask, without face mask and not a person.
