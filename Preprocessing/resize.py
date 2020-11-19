@@ -7,6 +7,7 @@ from pathlib import Path
 
 
 datasetPath =Path('C:/Users/eaitfat/Desktop/Dataset3class')
+
 nonMaskPath = datasetPath/'NoMask-images1024x1024'
 maskPath = datasetPath/'Mask-CMFD'
 notPersonPath = datasetPath/'NotPerson'
