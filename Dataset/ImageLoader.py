@@ -13,8 +13,8 @@ def load_data(root_path, dir, test_split, val_split, batch_size):
         [transforms.Resize((224, 224)),
          transforms.RandomHorizontalFlip(),
          transforms.ToTensor(),
-         transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                              std=[0.229, 0.224, 0.225]),
+         transforms.Normalize(mean=[0.5, 0.5, 0.5],
+                              std=[0.5, 0.5, 0.5]),
          ]),
         'tar': transforms.Compose(
         [transforms.Resize((224, 224)),

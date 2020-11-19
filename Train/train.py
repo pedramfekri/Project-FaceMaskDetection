@@ -5,7 +5,7 @@ import torch.nn as nn
 import numpy as np
 import matplotlib.pyplot as plt
 
-num_epochs = 4
+num_epochs = 20
 num_classes = 3
 learning_rate = 0.001
 
