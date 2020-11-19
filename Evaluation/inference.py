@@ -1,18 +1,14 @@
-import Model.ResNet as res
 import torch
-import torch.nn as nn
-import numpy as np
-import matplotlib.pyplot as plt
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torch.utils.data as td
 import numpy as np
 
 
-model_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Train/'
-model_name = 'ResNetepochs20.pt'
+model_path = '../Train/'
+model_name = 'FinalResNet.pt'
 
-root_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Dataset/'
+root_path = '../Dataset/'
 dir = 'Dataset-3Class-Balanced'
 
 transform_dict = {
@@ -20,14 +16,8 @@ transform_dict = {
         [transforms.Resize((224, 224)),
          transforms.RandomHorizontalFlip(),
          transforms.ToTensor(),
-         transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                              std=[0.229, 0.224, 0.225]),
-         ]),
-        'tar': transforms.Compose(
-        [transforms.Resize((224, 224)),
-         transforms.ToTensor(),
-         transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                              std=[0.229, 0.224, 0.225]),
+         transforms.Normalize(mean=[0.5, 0.5, 0.5],
+                              std=[0.5, 0.5, 0.5]),
          ])}
 
 data = datasets.ImageFolder(root=root_path + dir, transform=transform_dict['src'])
@@ -36,7 +26,8 @@ dataset = torch.utils.data.DataLoader(data, batch_size=32, shuffle=True, drop_la
 
 model = torch.load(model_path + model_name)
 
-
+device = "cpu"
+model.to(device)
 check = 1
 model.eval()
 with torch.no_grad():
