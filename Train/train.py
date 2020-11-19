@@ -31,6 +31,9 @@ model_path = 'FinalResNet.pt'
 dir = 'Dataset-3Class-Balanced'
 
 train, test, val = ds.load_data(root_path, dir, 0.3, 0.1, 32)
+print(len(train))
+print(len(test))
+print(len(val))
 
 total_step = len(train)
 loss_list = []
