@@ -30,7 +30,7 @@ for imgPath in tqdm(list(maskPath.iterdir()), desc='mask'):
     image=parent_directory_name+'\\'+ directory_name
     ImageDF = ImageDF.append({
             'image': image,
-            'mask': 0
+            'label': 0
     }, ignore_index=True)
 
 for imgPath in tqdm(list(nonMaskPath.iterdir()), desc='non mask'):
@@ -39,7 +39,7 @@ for imgPath in tqdm(list(nonMaskPath.iterdir()), desc='non mask'):
     image = parent_directory_name + '\\' + directory_name
     ImageDF = ImageDF.append({
             'image': image,
-            'mask': 1
+            'label': 1
     }, ignore_index=True)
 
 for imgPath in tqdm(list(NotPersonPath.iterdir()), desc='notPerson'):
@@ -48,7 +48,7 @@ for imgPath in tqdm(list(NotPersonPath.iterdir()), desc='notPerson'):
     image = parent_directory_name + '\\' + directory_name
     ImageDF = ImageDF.append({
             'image': image,
-            'mask': 2
+            'label': 2
     }, ignore_index=True)
 
 ImageDF.to_pickle('images_DF.pickle')
