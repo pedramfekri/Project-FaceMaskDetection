@@ -7,24 +7,24 @@ import matplotlib.pyplot as plt
 import Model.SimpleCNN as SCNN
 
 
-num_epochs = 20
+num_epochs = 20 # how many raning
 num_classes = 3
-learning_rate = 0.001
+learning_rate = 0.001 # we start with this value for learning rate
 
 # torch.cuda.set_device(0)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(torch.cuda.is_available())
 
 
-model = res.ResNet18()
+model = res.ResNet18()   # create an object of the class ResNet
 #model = SCNN.SimpleCNN()
 
-model.to(device)
+model.to(device) #
 
 
 
-criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+criterion = nn.CrossEntropyLoss() # everytime we do feedforward we get value, we get lossfunction(there are different ones)
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate) # adam optimizer will change the value intil arrive to
 
 root_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Dataset/'
 model_path = 'FinalResNet.pt'
@@ -32,24 +32,24 @@ model_path = 'FinalResNet.pt'
 
 dir = 'Dataset-3Class-Balanced'
 
-train, test, val = ds.load_data(root_path, dir, 0.3, 0.1, 32)
+train, test, val = ds.load_data(root_path, dir, 0.3, 0.1, 32)  #load dataset (test_split, val_split, batch_size)
 
 total_step = len(train)
 loss_list = []
 acc_list = []
 acc_list_val = []
-
+# train
 for epoch in range(num_epochs):
     for i, data in enumerate(train):
         # forward
-        images, labels = data[0].to(device), data[1].to(device)
-        outputs = model(images)
+        images, labels = data[0].to(device), data[1].to(device) #
+        outputs = model(images) # it gone ran forward class
         loss = criterion(outputs, labels)
         loss_list.append(loss.item())
         # backward & optimize
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+        optimizer.zero_grad() # initially optimizer have 0 value
+        loss.backward() # do backpropagation
+        optimizer.step() # when we do beckpropagation optimizer will update the values
         # train eval
         total = labels.size(0)
         _, predicted = torch.max(outputs.data, 1)
@@ -61,7 +61,8 @@ for epoch in range(num_epochs):
             for dataVal in val:
                 images_v, labels_v = dataVal[0].to(device), dataVal[1].to(device)
                 outputs = model(images_v)
-                _, predicted = torch.max(outputs.data, 1)
+                _, predicted = torch.max(outputs.data, 1) # the ouput has 3 nodes, so I pick the max
+    # so, softmax will give probability value for each class, so we pick the max one
                 correct_v += (predicted == labels_v).sum().item()
                 total_v += labels_v.size(0)
 

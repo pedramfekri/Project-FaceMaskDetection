@@ -31,7 +31,7 @@ def load_data(root_path, dir, test_split, val_split, batch_size):
     train_size = dataset_size - (test_size + val_size)
 
     train_dataset, test_dataset, val_dataset = td.random_split(data,
-                                               [train_size, test_size, val_size])
+                                               [train_size, test_size, val_size])  #split the data
 
     data_loader_train = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=False, num_workers=0)
     data_loader_test  = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=True, drop_last=False, num_workers=0)

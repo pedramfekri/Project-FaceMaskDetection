@@ -35,7 +35,7 @@ data = datasets.ImageFolder(root=root_path + dir, transform=transform_dict['src'
 dataset = torch.utils.data.DataLoader(data, batch_size=32, shuffle=True, drop_last=False, num_workers=0)
 
 
-model = torch.load(model_path + model_name)
+model = torch.load(model_path + model_name,map_location=torch.device('cpu'))
 device="cpu"
 model.to(device)
 
