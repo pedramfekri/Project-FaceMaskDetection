@@ -13,14 +13,8 @@ def load_data(root_path, dir, test_split, val_split, batch_size):
         [transforms.Resize((224, 224)),
          transforms.RandomHorizontalFlip(),
          transforms.ToTensor(),
-         transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                              std=[0.229, 0.224, 0.225]),
-         ]),
-        'tar': transforms.Compose(
-        [transforms.Resize((224, 224)),
-         transforms.ToTensor(),
-         transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                              std=[0.229, 0.224, 0.225]),
+         transforms.Normalize(mean=[0.5, 0.5, 0.5],
+                              std=[0.5, 0.5, 0.5]),
          ])}
 
     data = datasets.ImageFolder(root=root_path + dir, transform=transform_dict['src'])
@@ -40,22 +34,23 @@ def load_data(root_path, dir, test_split, val_split, batch_size):
     return data_loader_train, data_loader_test, data_loader_val
 
 
+root_path = '../Dataset/'
+dir = 'Dataset-3Class-Balanced'
 
-# root_path = 'D:/OneDrive/Uni/PhD/Intro-to-AI/Project/Project-FaceMaskDetection/Dataset/'
-# dir = 'Dataset-3Class-Balanced'
-#
-# train, test, val = load_data(root_path, dir, 0.3, 0.1, 32)
-# print(len(train))
-# print(len(test))
-# print(len(val))
-#
-# train = iter(train)
-# a, label = next(train)
-# im = a[0].numpy()
-# print('label')
-# print(label)
-# print(im.shape)
-# im = np.transpose(im, [1, 2, 0])
-# print(im.shape)
-# plt.imshow(im)
-# plt.show()
+train, test, val = load_data(root_path, dir, 0.3, 0.1, 32)
+print(len(train))
+print(len(test))
+print(len(val))
+
+train = iter(train)
+a, label = next(train)
+print(a[1])
+print(label[1])
+im = a[0].numpy()
+print('label')
+print(label)
+print(im.shape)
+im = np.transpose(im, [1, 2, 0])
+print(im.shape)
+plt.imshow(im)
+plt.show()
