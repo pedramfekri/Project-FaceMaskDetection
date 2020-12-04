@@ -34,21 +34,23 @@ def load_data(root_path, dir, test_split, val_split, batch_size):
     return data_loader_train, data_loader_test, data_loader_val
 
 
-# root_path = '../Dataset/'
-# dir = 'Dataset-3Class-Balanced'
-#
-# train, test, val = load_data(root_path, dir, 0.3, 0.1, 32)
-# print(len(train))
-# print(len(test))
-# print(len(val))
-#
-# train = iter(train)
-# a, label = next(train)
-# im = a[0].numpy()
-# print('label')
-# print(label)
-# print(im.shape)
-# im = np.transpose(im, [1, 2, 0])
-# print(im.shape)
-# plt.imshow(im)
-# plt.show()
+root_path = '../Dataset/'
+dir = 'Dataset-3Class-Balanced'
+
+train, test, val = load_data(root_path, dir, 0.3, 0.1, 32)
+print(len(train))
+print(len(test))
+print(len(val))
+
+train = iter(train)
+a, label = next(train)
+print(a[1])
+print(label[1])
+im = a[0].numpy()
+print('label')
+print(label)
+print(im.shape)
+im = np.transpose(im, [1, 2, 0])
+print(im.shape)
+plt.imshow(im)
+plt.show()
