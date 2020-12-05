@@ -36,7 +36,7 @@ def dataFrameMaker():
     for imgPath in tqdm(list(maskPath.iterdir()), desc='mask'):
         parent_directory, directory_name = os.path.split(imgPath)
         parent_parent_directory, parent_directory_name = os.path.split(parent_directory)
-        image=parent_directory_name+'\\'+ directory_name
+        image=parent_directory_name+'/'+ directory_name
         ImageDF = ImageDF.append({
                 'image': image,
                 'label': int(0)
@@ -45,7 +45,7 @@ def dataFrameMaker():
     for imgPath in tqdm(list(nonMaskPath.iterdir()), desc='non mask'):
         parent_directory, directory_name = os.path.split(imgPath)
         parent_parent_directory, parent_directory_name = os.path.split(parent_directory)
-        image = parent_directory_name + '\\' + directory_name
+        image = parent_directory_name + '/' + directory_name
         ImageDF = ImageDF.append({
                 'image': image,
                 'label': int(1)
@@ -54,7 +54,7 @@ def dataFrameMaker():
     for imgPath in tqdm(list(NotPersonPath.iterdir()), desc='notPerson'):
         parent_directory, directory_name = os.path.split(imgPath)
         parent_parent_directory, parent_directory_name = os.path.split(parent_directory)
-        image = parent_directory_name + '\\' + directory_name
+        image = parent_directory_name + '/' + directory_name
         ImageDF = ImageDF.append({
                 'image': image,
                 'label': int(2)
@@ -62,7 +62,7 @@ def dataFrameMaker():
 
     # ImageDF.to_pickle('images_DF.pickle')
     return ImageDF
-
+"""
 df = dataFrameMaker()
 # print(df.shape)
 # print(df.head())
@@ -116,4 +116,4 @@ for train_index, test_index in kf.split(x):
     # plt.imshow(im)
     # plt.show()
 #
-
+"""

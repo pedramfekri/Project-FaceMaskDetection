@@ -1,0 +1,17 @@
+<<<<Class 0: Mask, Class 1: No Mask, Class 2: Not a Person>>>>
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.99      0.97      0.98       313
+           1       1.00      1.00      1.00       274
+           2       0.97      1.00      0.98       313
+
+    accuracy                           0.99       900
+   macro avg       0.99      0.99      0.99       900
+weighted avg       0.99      0.99      0.99       900
+
+Confusion Matrix:
+[[303   0  10]
+ [  1 273   0]
+ [  1   0 312]]
+mean of accuracy through out the folds =  0.9838888888888888
