@@ -45,6 +45,7 @@ for epoch in range(num_epochs):
         # forward
         images, labels = data[0].to(device), data[1].to(device)
         outputs = model(images)
+        print(labels)
         loss = criterion(outputs, labels)
         loss_list.append(loss.item())
         # backward & optimize

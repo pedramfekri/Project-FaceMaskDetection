@@ -34,15 +34,19 @@ class CustomDataLoader(Dataset):
                                 self.df.iloc[idx, 0])
 
         # image = io.imread(img_name)
-        image = Image.open(img_name)
+        image = Image.open(img_name).convert("RGB")
         # print(image)
         if self.transform:
             image = self.transform(image)
-        label = self.df.iloc[idx, 1:]
-        label = np.array([label])
-        label = label.astype('int').reshape(-1, 1)
+
+        label = self.df.iloc[idx, 1]
+        # print(type(label))
+        label = int(label)
+        # label = label.tolist()
+        # label = np.array(label)
+        # label = label.astype('int')# .reshape(1, -1)
         # sample = {'image': image, 'label': label}
-        sample = [image, label]
+        sample = image, label
 
         # if self.transform:
         #     sample = self.transform(sample)
