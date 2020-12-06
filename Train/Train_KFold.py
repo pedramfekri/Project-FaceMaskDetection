@@ -10,9 +10,9 @@ from sklearn.model_selection import KFold
 import pandas as pd
 
 
-num_epochs = 20
+num_epochs = 10
 num_classes = 3
-learning_rate = 0.001
+learning_rate = 0.0005
 
 # torch.cuda.set_device(0)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -20,13 +20,13 @@ print(torch.cuda.is_available())
 
 
 root_path = '../Dataset/'
-model_path = 'FinalResNet.pt'
+model_path = 'FinalResNet'
 # model_path = 'FinalCNN.pt'
 
 dir = 'Dataset-3Class-Balanced/'
 
 df = Df_Image.dataFrameMaker()
-x = df.iloc[:,0]
+x = df.iloc[:, 0]
 y = df.iloc[:, 1]
 
 fold = 10
@@ -38,6 +38,10 @@ dir = 'Dataset-3Class-Balanced/'
 
 df_loss = pd.DataFrame()
 df_acc = pd.DataFrame()
+
+df_loss_overall = pd.DataFrame()
+df_acc_overall = pd.DataFrame()
+mean_acc = 0
 
 composed = transforms.Compose([transforms.Resize((224, 224)),
                                 transforms.RandomHorizontalFlip(),
@@ -72,19 +76,27 @@ for train_index, test_index in kf.split(x):
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-    total_step = len(train)
+    total_step = len(dataLoader_train)
     loss_list = []
     acc_list = []
+    acc_overall_list = []
+    loss_overall_list = []
 
     k = k + 1
-
+    t = 0
+    t_loss = 0
+    t_acc = 0
     for epoch in range(num_epochs):
         for i, data in enumerate(dataLoader_train):
+            t += 1
             # forward
             images, labels = data[0].to(device), data[1].to(device)
             outputs = model(images)
+            # print(labels)
             loss = criterion(outputs, labels)
             loss_list.append(loss.item())
+            t_loss += loss.item()
+            loss_overall_list.append(t_loss / t)
             # backward & optimize
             optimizer.zero_grad()
             loss.backward()
@@ -94,6 +106,9 @@ for train_index, test_index in kf.split(x):
             _, predicted = torch.max(outputs.data, 1)
             correct = (predicted == labels).sum().item()
             acc_list.append(correct / total)
+            batch_acc = correct / total
+            t_acc += batch_acc
+            acc_overall_list.append(t_acc / t)
             if (i + 1) % 10 == 0:
                 print('Fold [{}/{}], Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}, Accuracy: {:.2f}%'.format(k, fold, epoch + 1, num_epochs, i + 1,
                                                                                                           total_step,
@@ -104,6 +119,12 @@ for train_index, test_index in kf.split(x):
 
     df_a = pd.DataFrame(acc_list)
     df_acc = pd.concat([df_acc, df_a], axis=1, sort=False, ignore_index=True)
+
+    df_a_o = pd.DataFrame(acc_overall_list)
+    df_acc_overall = pd.concat([df_acc_overall, df_a_o], axis=1, sort=False, ignore_index=True)
+
+    df_l_o = pd.DataFrame(loss_overall_list)
+    df_loss_overall = pd.concat([df_loss_overall, df_l_o], axis=1, sort=False, ignore_index=True)
 
     model.eval()
     check = 1
@@ -136,29 +157,34 @@ for train_index, test_index in kf.split(x):
         from sklearn.metrics import confusion_matrix
 
         print(confusion_matrix(AllLabels, AllPredictions))
+        from sklearn.metrics import accuracy_score
+        mean_acc = mean_acc + accuracy_score(AllLabels, AllPredictions)
 
+    torch.save(model, model_path+str(k)+'.pt')
 
-# torch.save(model, model_path)
+print('mean of accuracy through out the folds = ', mean_acc/fold)
 
-plt.figure()
-
-
-plt.subplot(2, 1, 1)
-df_acc = df_acc.cumsum()
+# plt.figure()
+# df_acc = df_acc.cumsum()
 df_acc.plot()
-# plt.legend(('validation accuracy', 'training accuracy'))
-plt.title('training accuracy - each point is related to one batch')
+plt.title('accuracy_per_batch')
 plt.grid(True)
 
-
-plt.subplot(2, 1, 2)
-df_loss = df_loss.cumsum()
+# df_loss = df_loss.cumsum()
 df_loss.plot()
-plt.legend('loss')
-plt.title('loss')
+plt.title('loss_per_batch')
+plt.grid(True)
+
+df_loss_overall.plot()
+plt.title('loss_overall')
+plt.grid(True)
+
+df_acc_overall.plot()
+plt.title('acc_overall')
 plt.grid(True)
 
 plt.show()
+
 
 
 
