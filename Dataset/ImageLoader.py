@@ -7,10 +7,10 @@ import matplotlib.pyplot as plt
 
 
 # get data from the folders in the root and assign labels to data of every folder separately.
-def load_data(root_path, dir, test_split, val_split, batch_size):
+def load_data(root_path, dir, test_split, val_split, batch_size, inputSizeW, inputSizeL):
     transform_dict = {
         'src': transforms.Compose(
-        [transforms.Resize((224, 224)),
+        [transforms.Resize((inputSizeW, inputSizeL)),
          transforms.RandomHorizontalFlip(),
          transforms.ToTensor(),
          transforms.Normalize(mean=[0.5, 0.5, 0.5],
@@ -34,23 +34,23 @@ def load_data(root_path, dir, test_split, val_split, batch_size):
     return data_loader_train, data_loader_test, data_loader_val
 
 
-root_path = '../Dataset/'
-dir = 'Dataset-3Class-Balanced'
-
-train, test, val = load_data(root_path, dir, 0.3, 0.1, 32)
-print(len(train))
-print(len(test))
-print(len(val))
-
-train = iter(train)
-a, label = next(train)
-print(a[1])
-print(label[1])
-im = a[0].numpy()
-print('label')
-print(label)
-print(im.shape)
-im = np.transpose(im, [1, 2, 0])
-print(im.shape)
-plt.imshow(im)
-plt.show()
+# root_path = '../Dataset/'
+# dir = 'Dataset-3Class-Balanced'
+#
+# train, test, val = load_data(root_path, dir, 0.3, 0.1, 32, 224, 224)
+# print(len(train))
+# print(len(test))
+# print(len(val))
+#
+# train = iter(train)
+# a, label = next(train)
+# print(a[1])
+# print(label[1])
+# im = a[0].numpy()
+# print('label')
+# print(label)
+# print(im.shape)
+# im = np.transpose(im, [1, 2, 0])
+# print(im.shape)
+# plt.imshow(im)
+# plt.show()

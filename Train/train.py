@@ -10,6 +10,7 @@ import Model.SimpleCNN as SCNN
 num_epochs = 20
 num_classes = 3
 learning_rate = 0.001
+imageSize = 224
 
 # torch.cuda.set_device(0)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -30,7 +31,7 @@ model_path = 'FinalResNet.pt'
 
 dir = 'Dataset-3Class-Balanced'
 
-train, test, val = ds.load_data(root_path, dir, 0.3, 0.1, 32)
+train, test, val = ds.load_data(root_path, dir, 0.3, 0.1, 32, imageSize, imageSize)
 print(len(train))
 print(len(test))
 print(len(val))
