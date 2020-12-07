@@ -6,10 +6,10 @@ please follow the instruction below so as to run the project.
 
 ## How to train the model?
 
-- Find the [train.py](https://github.com/pedramfekri/Project-FaceMaskDetection/blob/master/Train/train.py) in the [Train](https://github.com/pedramfekri/Project-FaceMaskDetection/tree/master/Train) folder.
-- Run [train.py](https://github.com/pedramfekri/Project-FaceMaskDetection/blob/master/Train/train.py)
+- Find the [train.py](https://github.com/pedramfekri/Project-FaceMaskDetection/blob/master/Train/train.py) OR [Train_KFold.py](https://github.com/pedramfekri/Project-FaceMaskDetection/blob/master/Train/Train_KFold.py) in the [Train](https://github.com/pedramfekri/Project-FaceMaskDetection/tree/master/Train) folder.
+- Run [train.py](https://github.com/pedramfekri/Project-FaceMaskDetection/blob/master/Train/train.py) OR [Train_KFold.py](https://github.com/pedramfekri/Project-FaceMaskDetection/blob/master/Train/Train_KFold.py)
 
-After running the aforementioned module, the model will be trained and the accuracy of the model will be plotted for both training and validation data. In addition, the loss for each iteration will be plotted. Then, the model will be saved and the evaluation phase will be started on the test data. Finally, the performance of the model on the test data will be investigated using different metrics.
+After running the aforementioned module, the model will be trained and the accuracy of the model will be plotted for both training and validation data. In addition, the loss for each iteration will be plotted. Then, the model will be saved and the evaluation phase will be started on the test data. Finally, the performance of the model on the test data will be investigated using different metrics. For the K-Fold training, a figure showing the accuract and loss accross all folds will be shown, and the average accuracy will be given at the end.
 
 ## How to test the model?
 
