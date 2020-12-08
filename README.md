@@ -26,3 +26,6 @@ The saved model is also utilized in an inference engine with the aim of making p
 - Run [live_inference.py](https://github.com/pedramfekri/Project-FaceMaskDetection/blob/master/Inference/live_inference.py).
 
 You will see the a frame showing your camera stream as well as the predicted class labels in the terminal. 
+# COMP 6721 Applied Artificial Intelligence (Fall 2020) -- Project Assignment Part II
+In the second part, K-Fold cross-validation has been deployed in order to evaluate the performance of the model through 10 folds. 
+You can find the implementation in the following file: [Train_KFold.py](https://github.com/pedramfekri/Project-FaceMaskDetection/blob/master/Train/Train_KFold.py)
