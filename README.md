@@ -1,4 +1,4 @@
-# COMP 6721 Applied Artificial Intelligence (Fall 2020) -- Project Assignment Part I
+# Face Mask Detection - ResNet
 
 In this project, an image classifier has been designed based on the ResNet graph on Pytorch.
 The dataset contains 9000 images of three classes: with face mask, without face mask and not a person.
@@ -26,6 +26,6 @@ The saved model is also utilized in an inference engine with the aim of making p
 - Run [live_inference.py](https://github.com/pedramfekri/Project-FaceMaskDetection/blob/master/Inference/live_inference.py).
 
 You will see the a frame showing your camera stream as well as the predicted class labels in the terminal. 
-# COMP 6721 Applied Artificial Intelligence (Fall 2020) -- Project Assignment Part II
+# Updates
 In the second part, K-Fold cross-validation has been deployed in order to evaluate the performance of the model through 10 folds. 
 You can find the implementation in the following file: [Train_KFold.py](https://github.com/pedramfekri/Project-FaceMaskDetection/blob/master/Train/Train_KFold.py)
